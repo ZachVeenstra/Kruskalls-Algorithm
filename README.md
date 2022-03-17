@@ -1,1 +1,0 @@
-# Kruskalls-Algorithm

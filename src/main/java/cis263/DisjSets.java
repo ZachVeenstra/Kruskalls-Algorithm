@@ -9,6 +9,10 @@ package cis263;
 // ******************ERRORS********************************
 // No error checking is performed
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 /**
  * Disjoint set class, using union by rank and path compression.
  * Elements in the set are numbered starting at 0.
@@ -66,28 +70,78 @@ public class DisjSets
     // Test main; all finds on same output line should be identical
     public static void main( String [ ] args )
     {
-        int NumElements = 128;
-        int NumInSameSet = 16;
+        // int NumElements = 128;
+        // int NumInSameSet = 16;
 
-        DisjSets ds = new DisjSets( NumElements );
-        int set1, set2;
+        // DisjSets ds = new DisjSets( NumElements );
+        // int set1, set2;
 
-        for( int k = 1; k < NumInSameSet; k *= 2 )
-        {
-            for( int j = 0; j + k < NumElements; j += 2 * k )
-            {
-                set1 = ds.find( j );
-                set2 = ds.find( j + k );
-                ds.union( set1, set2 );
+        // for( int k = 1; k < NumInSameSet; k *= 2 )
+        // {
+        //     for( int j = 0; j + k < NumElements; j += 2 * k )
+        //     {
+        //         set1 = ds.find( j );
+        //         set2 = ds.find( j + k );
+        //         ds.union( set1, set2 );
+        //     }
+        // }
+
+        // for( int i = 0; i < NumElements; i++ )
+        // {
+        //     System.out.print( ds.find( i )+ "*" );
+        //     if( i % NumInSameSet == NumInSameSet - 1 )
+        //         System.out.println( );
+        // }
+        // System.out.println( );
+
+         // takes user input
+        Scanner userInput = new Scanner(System.in); 
+
+        System.out.println("Read from file or stdin? (file/stdin): ");
+ 
+        // the user's choice between file or stdin
+        String choice = userInput.nextLine();
+            
+        if (choice.equals("file")) {
+            
+            System.out.println("Enter File name: ");
+            
+            try {
+                
+                // the user-inputed file
+                File userFile = new File(userInput.nextLine());
+ 
+                // parses the user-inputed file
+                Scanner fileInput = new Scanner(userFile);
+ 
+                while (fileInput.hasNext()) { // loops through the whole file
+                    //int value = fileInput.nextInt();
+                    // TODO: Add edges from file
+                }
+ 
+                // Print the edges of the MST and the cost.
+                fileInput.close(); // closes the file scanner
+            }
+            catch (FileNotFoundException f) { // if the user's file wasn't found
+                System.out.println("File not found. Try again.");
+                main(args); // run the program again
             }
         }
-
-        for( int i = 0; i < NumElements; i++ )
-        {
-            System.out.print( ds.find( i )+ "*" );
-            if( i % NumInSameSet == NumInSameSet - 1 )
-                System.out.println( );
+        else if (choice.equals("stdin")) {
+            System.out.println("Enter first node, second node, and weight, or ctrl + d to end: ");
+ 
+            while (userInput.hasNext()) { // asks user for input until ctrl + d is sent
+                //int value = userInput.nextInt();
+                // TODO: Add edges
+            }
+            // Print the edges of the MST and the cost.
+            
         }
-        System.out.println( );
+        else { // if the user didn't input file or stdin
+            System.out.println("Incorrect formatting.");
+            main(args); // run the program again
+        }
+        
+        userInput.close(); // closes the input scanner
     }
 }

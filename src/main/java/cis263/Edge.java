@@ -61,4 +61,11 @@ public class Edge implements Comparable<Edge> {
         // Signum forces the method to return -1, 0, or 1.
         return Integer.signum(this.getWeight() - e.getWeight());
     }
+
+
+    @Override
+    public String toString() {
+        return "[" + this.getFirstNode() + "," + this.getSecondNode() +
+                "] weight: " + this.getWeight();
+    }
 }
